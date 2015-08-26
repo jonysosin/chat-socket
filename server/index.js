@@ -50,11 +50,15 @@ io.on('connection', function (socket) {
 	});
 
 	socket.on('change channel', function(newChannel){
-		socket.leave(channel);
-		socket.join(newChannel);
-		channel = newChannel;
+		if(newChannel != channel) {
+			console.log(newChannel);
+			newChannel = 'room-' + newChannel;
+			socket.leave(channel);
+			socket.join(newChannel);
+			channel = newChannel;
 
-		io.emit('rooms', io.sockets.adapter.rooms);
+			io.emit('rooms', io.sockets.adapter.rooms);
+		}
 	});
 
 });

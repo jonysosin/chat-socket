@@ -5,7 +5,10 @@ $('#button').click(function(){
 	console.log('socket-emit mssage');
 });
 $('#channels').change(function(){
+
 	socket.emit('change channel', $(this).val());
+
+	$('#current').val( $(this).val() );
 });
 
 socket.on('message', function(msg){
@@ -21,13 +24,36 @@ socket.on('message', function(msg){
 });
 
 socket.on('rooms', function(obj){
-	console.log(obj);
+
+	var rooms = getRooms(obj);
+	$('#channels').html('');
+
+	$(rooms).each(function(a,b){
+		$('#channels').append('<option value="' + b + '">' + b + '</option>');
+	});
 });
 
 $('#buttonadd').click(function(){
 
 	socket.emit('change channel', $('#newchannel').val());
 
-	$('#channels').append('<option value="' + $('#newchannel').val() + '" selected>' + $('#newchannel').val() + '</option>');
+	$('#channels').append('<option value="' + $('#newchannel').val() + '">' + $('#newchannel').val() + '</option>');
 
+	$('#current').val( $('#newchannel').val() );
 });
+
+function getRooms(obj)
+{
+	var rooms = [];
+	var i = 0;
+
+	for(var room in obj){
+		if (room.startsWith('room-'))
+		{
+			rooms[i] = room.substr(5);
+			i++;
+		}
+	}
+
+	return rooms;
+}
