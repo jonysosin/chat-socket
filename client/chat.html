@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<link rel="stylesheet" href="style.css"/>
+
+<ul id="messages">
+</ul>
+
+<span style="display: block">Send Message</span>
+<div class="container-control">
+	<input type="text" id="text"/>
+	<button id="button">Send</button>
+	<div class="right">
+		<select id="channels">
+			<option value="channel-a">Channel A</option>
+			<option value="channel-b">Channel B</option>
+			<option value="channel-c">Channel C</option>
+			<option value="channel-d">Channel D</option>
+		</select>
+	</div>
+</div>
+<br/>
+
+<span style="display: block">Create Channel</span>
+<div class="container-control">
+	<input type="text" id="newchannel"/>
+	<button id="buttonadd">Add</button>
+</div>
+
+</body>
+</html>
+<script src="core.js"></script>
